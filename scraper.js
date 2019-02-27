@@ -10,17 +10,22 @@ const meme = async () => {
 		}
 
 		const data = await res.json();
+		const arr = [];
 
-		const title = data.data.children[0].data.title;
-		const rating = data.data.children[0].data.ups;
-		const url = data.data.children[0].data.url;
+		for (let i = 0; i < data.data.children.length; i++) {
+			const title = data.data.children[i].data.title;
+			const rating = data.data.children[i].data.ups;
+			const url = data.data.children[i].data.url;
 
-		let day = {
-			title: title,
-			rating: rating,
-			url: url
-		};
-		return day;
+			let day = {
+				title: title,
+				rating: rating,
+				url: url
+			};
+
+			arr.push(day);
+		}
+		return arr;
 	} catch (err) {
 		console.error(err);
 	}
