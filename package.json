@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/pekac45/meme-reposter/issues"
   },
-  "homepage": "https://github.com/pekac45/meme-reposter#readme"
+  "homepage": "https://github.com/pekac45/meme-reposter#readme",
+  "dependencies": {
+    "node-fetch": "^2.3.0"
+  }
 }
