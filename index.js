@@ -1,4 +1,7 @@
+/* eslint-disable no-unused-vars */
 const fetch = require("node-fetch");
+const Twit = require("twit");
+const config = require("./config");
 // const dailyLink = "https://www.reddit.com/r/memes/top.json?t=day";
 
 const meme = async () => {
@@ -10,7 +13,8 @@ const meme = async () => {
 		}
 
 		const data = await res.json();
-		const arr = [];
+
+		const dailyArr = [];
 
 		for (let i = 0; i < data.data.children.length; i++) {
 			const title = data.data.children[i].data.title;
@@ -23,12 +27,26 @@ const meme = async () => {
 				url: url
 			};
 
-			arr.push(day);
+			dailyArr.push(day);
 		}
-		return arr;
+		return dailyArr;
 	} catch (err) {
 		console.error(err);
 	}
 };
 
-meme().then(console.log);
+const Tweet = daily => {
+	let T = new Twit(config);
+	let maymay = daily;
+	T.post(
+		"statuses/update",
+		{ status: `${maymay[0].title} ${maymay[0].url} #memes #meme #funny #dank` },
+		function(err, data, _response) {
+			console.log(data);
+			console.log(err);
+			// console.log(response);
+		}
+	);
+};
+
+meme().then(Tweet);
