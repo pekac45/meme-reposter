@@ -72,7 +72,13 @@ const Tweet = daily => {
 						console.log(err);
 					} else {
 						console.log("Posted an image!");
-						fs.unlinkSync(imagePath);
+						fs.unlink(imagePath, function(err) {
+							if (err) {
+								console.log(`ERROR: unable to delete image ${imagePath}`);
+							} else {
+								console.log(`image ${imagePath} was deleted`);
+							}
+						});
 					}
 				}
 			);
