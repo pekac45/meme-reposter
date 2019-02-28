@@ -1,7 +1,10 @@
 /* eslint-disable no-unused-vars */
 const fetch = require("node-fetch");
 const Twit = require("twit");
+const fs = require("fs");
+const path = require("path");
 const config = require("./config");
+
 // const dailyLink = "https://www.reddit.com/r/memes/top.json?t=day";
 
 const meme = async () => {
@@ -38,15 +41,54 @@ const meme = async () => {
 const Tweet = daily => {
 	let T = new Twit(config);
 	let maymay = daily;
-	T.post(
-		"statuses/update",
-		{ status: `${maymay[0].title} ${maymay[0].url} #memes #meme #funny #dank` },
-		function(err, data, _response) {
-			console.log(data);
+	let i = 0;
+
+	console.log(`${maymay[i].title} ${maymay[i].url} #memes #meme #funny #dank`);
+
+	console.log("Opening an image...");
+	let image_path = path.join(__dirname, i + ".png"),
+		b64content = fs.readFileSync(image_path, { encoding: "base64" });
+
+	console.log("Uploading an image...");
+
+	T.post("media/upload", { media_data: b64content }, function(
+		err,
+		data,
+		response
+	) {
+		if (err) {
+			console.log("ERROR:");
 			console.log(err);
-			// console.log(response);
+		} else {
+			console.log("Image uploaded!");
+			console.log("Now tweeting it...");
+
+			T.post(
+				"statuses/update",
+				{ status: maymay[0].title, media_ids: new Array(data.media_id_string) },
+				function(err, data, response) {
+					if (err) {
+						console.log("ERROR:");
+						console.log(err);
+					} else {
+						console.log("Posted an image!");
+					}
+				}
+			);
 		}
-	);
+	});
 };
 
-meme().then(Tweet);
+const downloadPicture = async daily => {
+	let maymay = daily;
+	let i = 0;
+	fetch(`${maymay[i].url}`).then(res => {
+		const dest = fs.createWriteStream(`${i}.png`);
+		res.body.pipe(dest);
+	});
+};
+
+meme()
+	.then(downloadPicture)
+	.then(meme)
+	.then(Tweet);
