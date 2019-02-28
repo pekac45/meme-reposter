@@ -43,7 +43,7 @@ const Tweet = daily => {
 	let maymay = daily;
 	let i = 0;
 
-	console.log(`${maymay[i].title} ${maymay[i].url} #memes #meme #funny #dank`);
+	console.log(`${maymay[i].title} ${maymay[i].url}`);
 
 	console.log("Opening an image...");
 	let imagePath = path.join(__dirname, i + ".png"),
@@ -65,7 +65,10 @@ const Tweet = daily => {
 
 			T.post(
 				"statuses/update",
-				{ status: maymay[0].title, media_ids: new Array(data.media_id_string) },
+				{
+					status: `${maymay[0].title} #memes #meme #funny #dank`,
+					media_ids: new Array(data.media_id_string)
+				},
 				function(err, data, response) {
 					if (err) {
 						console.log("ERROR:");
@@ -95,7 +98,15 @@ const downloadPicture = async daily => {
 	});
 };
 
-meme()
-	.then(downloadPicture)
-	.then(meme)
-	.then(Tweet);
+const makeItHappen = async () => {
+	meme()
+		.then(downloadPicture)
+		.then(meme)
+		.then(Tweet);
+};
+
+// makeItHappen();
+
+setInterval(function() {
+	makeItHappen();
+}, 3600000);
