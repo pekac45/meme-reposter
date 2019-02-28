@@ -46,8 +46,8 @@ const Tweet = daily => {
 	console.log(`${maymay[i].title} ${maymay[i].url} #memes #meme #funny #dank`);
 
 	console.log("Opening an image...");
-	let image_path = path.join(__dirname, i + ".png"),
-		b64content = fs.readFileSync(image_path, { encoding: "base64" });
+	let imagePath = path.join(__dirname, i + ".png"),
+		b64content = fs.readFileSync(imagePath, { encoding: "base64" });
 
 	console.log("Uploading an image...");
 
@@ -72,6 +72,7 @@ const Tweet = daily => {
 						console.log(err);
 					} else {
 						console.log("Posted an image!");
+						fs.unlinkSync(imagePath);
 					}
 				}
 			);
