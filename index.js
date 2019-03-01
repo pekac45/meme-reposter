@@ -38,7 +38,9 @@ const meme = async () => {
 	}
 };
 
-const Tweet = daily => {
+exports.meme = meme;
+
+const tweet = daily => {
 	let T = new Twit(config);
 	let maymay = daily;
 	let i = 0;
@@ -63,6 +65,7 @@ const Tweet = daily => {
 			console.log("Image uploaded!");
 			console.log("Now tweeting it...");
 
+			// TWEET
 			T.post(
 				"statuses/update",
 				{
@@ -89,6 +92,8 @@ const Tweet = daily => {
 	});
 };
 
+exports.tweet = tweet;
+
 const downloadPicture = async daily => {
 	let maymay = daily;
 	let i = 0;
@@ -98,15 +103,15 @@ const downloadPicture = async daily => {
 	});
 };
 
+exports.downloadPicture = downloadPicture;
+
 const makeItHappen = async () => {
 	meme()
 		.then(downloadPicture)
 		.then(meme)
-		.then(Tweet);
+		.then(tweet);
 };
-
-// makeItHappen();
 
 setInterval(function() {
 	makeItHappen();
-}, 3600000);
+}, 43200000);
