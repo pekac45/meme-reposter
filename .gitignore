@@ -2,3 +2,5 @@
 /dist/
 config.js
 /config/dev.js
+dist/bot.zip
+dist/index.js
