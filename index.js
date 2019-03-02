@@ -6,7 +6,6 @@ const path = require("path");
 const config = require("./config");
 
 // const dailyLink = "https://www.reddit.com/r/memes/top.json?t=day";
-
 const meme = async () => {
 	try {
 		const res = await fetch("https://www.reddit.com/r/memes/top.json?t=day");
@@ -112,6 +111,8 @@ const makeItHappen = async () => {
 		.then(tweet);
 };
 
-setInterval(function() {
-	makeItHappen();
-}, 43200000);
+// setInterval(function() {
+// 	makeItHappen();
+// }, 43200000);
+
+makeItHappen();

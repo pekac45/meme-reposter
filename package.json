@@ -2,7 +2,6 @@
 	"name": "meme-bot",
 	"version": "0.1.0",
 	"description": "Filthy meme reposter to instagram so my gf keeps up to date as she doesn't use reddit",
-	"main": "index.js",
 	"scripts": {
 		"test": "test",
 		"build": "webpack"
