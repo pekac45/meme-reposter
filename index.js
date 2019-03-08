@@ -96,8 +96,8 @@ const alreadyPosted = async () => {
 		oldMeme = memeId;
 		console.log("Taking a break...");
 		makeItHappen();
-		await sleep(60000);
-		console.log("Two seconds later");
+		await sleep(1800000);
+		console.log("30 minutes later");
 
 		console.log(oldMeme, memeId);
 
@@ -108,8 +108,8 @@ const alreadyPosted = async () => {
 		await console.log(`from false part ${memeId} ${oldMeme}`);
 
 		console.log("waiting from index.js FALSE PART");
-		await sleep(60000);
-		console.log("Two seconds later");
+		await sleep(1800000);
+		console.log("30 minutes later");
 
 		alreadyPosted();
 	}
