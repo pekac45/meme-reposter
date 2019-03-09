@@ -39,8 +39,8 @@ function sleep(ms) {
 }
 
 const makeItHappen = async () => {
-	// Add if meme.id = previous.meme.id 
-		// wait 30 minutes
+	// Add if meme.id = previous.meme.id
+	// wait 30 minutes
 	// else do above
 	meme()
 		.then(downloadPicture)
@@ -51,7 +51,10 @@ const makeItHappen = async () => {
 const alreadyPosted = async () => {
 	let latestMeme = await meme();
 	let memeId = latestMeme[0].id;
-	await console.log("Starting already posted? script...");
+	await console.log(
+		`It's ${new Date().toLocaleString()} which is a time to make some donuts?`
+	);
+	await console.log("Let's get to work...");
 	await console.log(
 		`Current top reddit meme is: ${memeId}. Last posted is: ${oldMeme}`
 	);
