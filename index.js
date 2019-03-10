@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
-// const { meme } = require("./daily");
+const fetch = require("node-fetch");
+
 const { downloadPicture } = require("./downloadPicture");
 const { tweet } = require("./tweet");
 let oldMeme = "running 1st time.";
-
-const fetch = require("node-fetch");
 
 // const dailyLink = "https://www.reddit.com/r/memes/top.json?t=day";
 const meme = async () => {
@@ -62,6 +61,7 @@ const alreadyPosted = async () => {
 	if (memeId !== oldMeme) {
 		oldMeme = memeId;
 		await makeItHappen();
+		await sleep(5000);
 		await console.log("Done posting.");
 		await console.log("Taking a break...");
 		await sleep(3600000);
