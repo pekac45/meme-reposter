@@ -61,7 +61,7 @@ const alreadyPosted = async () => {
 	if (memeId !== oldMeme) {
 		oldMeme = memeId;
 		await makeItHappen();
-		await sleep(5000);
+		await sleep(10000);
 		await console.log("Done posting.");
 		await console.log("Taking a break...");
 		await sleep(3600000);

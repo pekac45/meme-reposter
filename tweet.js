@@ -17,11 +17,7 @@ const tweet = daily => {
 
 	console.log("Uploading an image...");
 
-	T.post("media/upload", { media_data: b64content }, function(
-		err,
-		data,
-		response
-	) {
+	T.post("media/upload", { media_data: b64content }, function(err, data, response) {
 		if (err) {
 			console.log("ERROR:");
 			console.log(err);
@@ -42,13 +38,13 @@ const tweet = daily => {
 						console.log(err);
 					} else {
 						console.log("Posted an image!");
-						fs.unlink(imagePath, function(err) {
-							if (err) {
-								console.log(`ERROR: unable to delete image ${imagePath}`);
-							} else {
-								console.log(`image ${imagePath} was deleted`);
-							}
-						});
+						// fs.unlink(imagePath, function(err) {
+						// 	if (err) {
+						// 		console.log(`ERROR: unable to delete image ${imagePath}`);
+						// 	} else {
+						// 		console.log(`image ${imagePath} was deleted`);
+						// 	}
+						// });
 					}
 				}
 			);
