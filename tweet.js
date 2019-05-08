@@ -2,7 +2,15 @@
 const fs = require("fs");
 const Twit = require("twit");
 const path = require("path");
-const config = require("./config");
+// Uncomment if running localy, leave commented if on heroku
+// const config = require("./config");
+
+const config = {
+	consumer_key: "process.env.BOT_CONSUMER_KEY",
+	consumer_secret: "process.env.BOT_CONSUMER_SECRET",
+	access_token: "process.env.BOT_ACCESS_TOKEN",
+	access_token_secret: "process.env.BOT_ACCESS_TOKEN_SECRET"
+};
 
 const tweet = daily => {
 	let T = new Twit(config);
