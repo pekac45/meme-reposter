@@ -90,5 +90,9 @@ server.listen(port, () => {
 	console.log("Express server listening on port", port);
 	console.log("STARTING BOT!!");
 
+	setInterval(function() {
+		http.get("https://polar-ridge-23908.herokuapp.com/");
+	}, 300000);
+
 	alreadyPosted();
 });
