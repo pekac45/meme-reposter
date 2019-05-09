@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const fetch = require("node-fetch");
+const http = require("http");
 
 const { downloadPicture } = require("./downloadPicture");
 const { tweet } = require("./tweet");
@@ -38,9 +39,6 @@ function sleep(ms) {
 }
 
 const makeItHappen = async () => {
-	// Add if meme.id = previous.meme.id
-	// wait 30 minutes
-	// else do above
 	meme()
 		.then(downloadPicture)
 		.then(meme)
@@ -50,13 +48,9 @@ const makeItHappen = async () => {
 const alreadyPosted = async () => {
 	let latestMeme = await meme();
 	let memeId = latestMeme[0].id;
-	await console.log(
-		`It's ${new Date().toLocaleString()} which is a time to make some donuts?`
-	);
+	await console.log(`It's ${new Date().toLocaleString()} which is a time to make some donuts?`);
 	await console.log("Let's get to work...");
-	await console.log(
-		`Current top reddit meme is: ${memeId}. Last posted is: ${oldMeme}`
-	);
+	await console.log(`Current top reddit meme is: ${memeId}. Last posted is: ${oldMeme}`);
 
 	if (memeId !== oldMeme) {
 		oldMeme = memeId;
@@ -71,9 +65,7 @@ const alreadyPosted = async () => {
 	} else {
 		let waitingMeme = await meme();
 		memeId = waitingMeme[0].id;
-		await console.log(
-			`This was already posted. Current ID: ${memeId} Old ID: ${oldMeme}`
-		);
+		await console.log(`This was already posted. Current ID: ${memeId} Old ID: ${oldMeme}`);
 
 		await sleep(3600000);
 		console.log("60 minutes later");
@@ -83,6 +75,20 @@ const alreadyPosted = async () => {
 };
 
 // Start infinite loop
-alreadyPosted();
 
 // makeItHappen();
+
+const port = process.env.PORT || 8080;
+
+const server = http.createServer((req, res) => {
+	res.statusCode = 200;
+	res.setHeader("Content-Type", "text/plain");
+	res.end("Hello World\n");
+});
+
+server.listen(port, () => {
+	console.log("Express server listening on port", port);
+	console.log("STARTING BOT!!");
+
+	alreadyPosted();
+});
