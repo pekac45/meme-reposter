@@ -61,7 +61,7 @@ const alreadyPosted = async () => {
 		await sleep(3600000);
 		console.log("60 minutes later");
 
-		alreadyPosted();
+		alreadyPosted().catch(console.log("ERROR IN DONE POSTING/INDEX.JS"));
 	} else {
 		let waitingMeme = await meme();
 		memeId = waitingMeme[0].id;
@@ -70,29 +70,32 @@ const alreadyPosted = async () => {
 		await sleep(3600000);
 		console.log("60 minutes later");
 
-		alreadyPosted();
+		alreadyPosted().catch(console.log("ERROR IN DONE POSTING/INDEX.JS - ALREADY POSTED"));
 	}
 };
 
 // Start infinite loop
+alreadyPosted().catch(console.log("ERROR IN THE MAIN THREAD/INDEX.JS"));
 
 // makeItHappen();
 
-const port = process.env.PORT || 8080;
+// START OF HEROKU ENVIROMENT
+// const port = process.env.PORT || 8080;
 
-const server = http.createServer((req, res) => {
-	res.statusCode = 200;
-	res.setHeader("Content-Type", "text/plain");
-	res.end("Hello World\n");
-});
+// const server = http.createServer((req, res) => {
+// 	res.statusCode = 200;
+// 	res.setHeader("Content-Type", "text/plain");
+// 	res.end("Hello World\n");
+// });
 
-server.listen(port, () => {
-	console.log("Express server listening on port", port);
-	console.log("STARTING BOT!!");
+// server.listen(port, () => {
+// 	console.log("Express server listening on port", port);
+// 	console.log("STARTING BOT!!");
 
-	setInterval(function() {
-		http.get("https://polar-ridge-23908.herokuapp.com/");
-	}, 300000);
+// 	setInterval(function() {
+// 		http.get("https://polar-ridge-23908.herokuapp.com/");
+// 	}, 300000);
 
-	alreadyPosted();
-});
+// 	alreadyPosted();
+// });
+// END OF HEROKU BLOCK ENVIORMENT

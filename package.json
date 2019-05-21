@@ -4,8 +4,7 @@
 	"description": "Filthy meme reposter to instagram so my gf keeps up to date as she doesn't use reddit",
 	"scripts": {
 		"test": "test",
-		"build": "webpack",
-		"start": "node index.js"
+		"build": "webpack"
 	},
 	"repository": {
 		"type": "git",

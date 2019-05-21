@@ -7,7 +7,7 @@ const downloadPicture = async daily => {
 	fetch(`${maymay[i].url}`).then(res => {
 		const dest = fs.createWriteStream(`${i}.png`);
 		res.body.pipe(dest);
-	});
+	}).catch(console.log("error in downloadPicture"));
 };
 
 exports.downloadPicture = downloadPicture;
